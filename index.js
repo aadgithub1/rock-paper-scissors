@@ -2,22 +2,18 @@ let humanScore = 0;
 let compScore = 0;
 
 function getHumanChoice(){
-
     let answerIsValid = false
-
     while (!answerIsValid){
         let userInput = prompt("Enter 'rock', 'paper', or 'scissors'").toLowerCase();
 
         answerIsValid = (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors')
 
-        //return the validated input
         if (answerIsValid){
             return userInput
         }
-        //if not valid
         console.warn('input is not valid');
     }
-    //result: return "rock", "paper", "scissors"
+    //result: return "rock", "paper", or "scissors"
 }
 
 function getCompChoice(){
@@ -33,16 +29,14 @@ function getCompChoice(){
     else if (randomSelector === 3){
         return "scissors"
     }
-    //result: rock, paper, or scissors is randomly returned
+    //result: return rock, paper, or scissors
 }
 
 function playGame(){
-
-    while (humanScore < 5 && compScore < 5){
+    while (humanScore < 5 && compScore < 5){ //keeps playing until someone reaches 5
         playRound(getHumanChoice(), getCompChoice());
         printCurrentScore();
     }
-
     printFinalScore(humanScore, compScore);
 }
 
@@ -60,9 +54,7 @@ function printFinalScore(humanScore, compScore){
     }
 }
 
-//create a function to play a round - args(compChoice, humanChoice)
 function playRound(humanChoice, compChoice){
-
     if (humanChoice !== compChoice){
         switch(humanChoice){
             case 'rock':
@@ -91,7 +83,7 @@ function playRound(humanChoice, compChoice){
         printTieMessage();
     }
 
-//result: log 'you (lose/win)! (winning choice) beats (losing choice)!' or if the choice is the same output 'Great minds think alike, it's a tie!'
+//result: log win, loss, or tie message
 }
 
 function printHumanWinsMsgAndIncScore(humanChoice, compChoice){
@@ -107,5 +99,4 @@ function printHumanLosesMsgAndIncScore(humanChoice, compChoice){
 function printTieMessage(){
     console.log('Great minds think alike, it\'s a tie!');
 }
-
 playGame();
