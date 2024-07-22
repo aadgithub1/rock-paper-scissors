@@ -1,0 +1,51 @@
+:root{
+    --cool-gray: #8789C0;
+    --alice: #F4FAFF;
+}
+
+*{
+    box-sizing: border-box;
+    background-color: var(--cool-gray);
+    color: var(--alice);
+}
+html{
+    display: flex;
+    justify-content: center;
+}
+html, body{
+    margin: 0;
+    padding: 0;
+}
+body{
+    width: 40%;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+.display-div{
+    display: flex;
+    flex-direction: column;
+}
+.score-wrapper-div{
+    display: flex;
+    justify-content: space-around;
+}
+.select-div{
+    display: flex;
+    flex-direction: column;
+}
+.select-btn-div{
+    display: flex;
+    justify-content: space-around;
+}
+button{
+    font-size: 20px;
+    font-weight: bold;
+    padding: 8px 16px;
+    border: 2px solid var(--alice);
+    border-radius: 4px;
+}
+.wrapper{
+    flex: 1;
+}

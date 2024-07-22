@@ -1,20 +1,17 @@
 let humanScore = 0;
 let compScore = 0;
+let selectDiv = document.querySelector('.select-div')
+let selectorBtns = document.querySelectorAll('button')
 
-function getHumanChoice(){
-    let answerIsValid = false
-    while (!answerIsValid){
-        let userInput = prompt("Enter 'rock', 'paper', or 'scissors'").toLowerCase();
+selectorBtns.forEach((btn) => btn.addEventListener('click', function(){
+    playRound(btn.textContent, getCompChoice())
+}))
 
-        answerIsValid = (userInput === 'rock' || userInput === 'paper' || userInput === 'scissors')
+//
 
-        if (answerIsValid){
-            return userInput
-        }
-        console.warn('input is not valid');
-    }
-    //result: return "rock", "paper", or "scissors"
-}
+
+// Display the running score, and announce a winner of the game once one player reaches 5 points
+
 
 function getCompChoice(){
     //generate a random number from 1 to 3
@@ -32,31 +29,10 @@ function getCompChoice(){
     //result: return rock, paper, or scissors
 }
 
-function playGame(){
-    while (humanScore < 5 && compScore < 5){ //keeps playing until someone reaches 5
-        playRound(getHumanChoice(), getCompChoice());
-        printCurrentScore();
-    }
-    printFinalScore(humanScore, compScore);
-}
-
-function printCurrentScore(){
-    console.log(`The current score is You: ${humanScore} Computer: ${compScore}`);
-}
-
-function printFinalScore(humanScore, compScore){
-    if (humanScore > compScore){
-        console.log(`You won ${humanScore} - ${compScore}!`);
-    } else if (humanScore < compScore){
-        console.log(`You lost ${compScore} - ${humanScore}!`);
-    } else{
-        console.log('It\'s a tie!');
-    }
-}
 
 function playRound(humanChoice, compChoice){
     if (humanChoice !== compChoice){
-        switch(humanChoice){
+        switch(humanChoice.toLowerCase()){
             case 'rock':
                 if (compChoice === 'paper'){
                     printHumanLosesMsgAndIncScore(humanChoice, compChoice);
@@ -87,16 +63,19 @@ function playRound(humanChoice, compChoice){
 }
 
 function printHumanWinsMsgAndIncScore(humanChoice, compChoice){
-    console.log(`You win! ${humanChoice.slice(0, 1).toUpperCase() + humanChoice.slice(1)} beats ${compChoice}!`); //correct sentence capitalization
+    let msg = document.createElement('h2')
+    msg.textContent = `You won! ${humanChoice} beats ${compChoice}`
+    selectDiv.appendChild(msg)
 
     humanScore++;
 }
 function printHumanLosesMsgAndIncScore(humanChoice, compChoice){
-    console.log(`You lose! ${compChoice.slice(0,1).toUpperCase() + compChoice.slice(1)} beats ${humanChoice}!`); //correct sentence capitalization
+    let msg = document.createElement('h2')
+    msg.textContent = `You won! ${humanChoice} beats ${compChoice}`
+    selectDiv.appendChild(msg)
 
     compScore++;
 }
 function printTieMessage(){
     console.log('Great minds think alike, it\'s a tie!');
 }
-playGame();
